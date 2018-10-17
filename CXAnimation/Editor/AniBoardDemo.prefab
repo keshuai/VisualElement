@@ -1,0 +1,196 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 400000}
+  - component: {fileID: 11400002}
+  - component: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: AniBoardDemo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: -0.9969019, w: -0.07865503}
+  m_LocalPosition: {x: 0, y: 312.705, z: 0}
+  m_LocalScale: {x: 0.90226233, y: 0.90226233, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b22274d1b22c48e7bd6e4dbf1c6dcec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimationList:
+  - m_AniType: 3
+    U3DCurve:
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 0
+      m_PostInfinity: 0
+    Target: {fileID: 400000}
+    TartgetWidget: {fileID: 0}
+    TargetPanel: {fileID: 0}
+    StartValue: {x: 0, y: 0, z: 0}
+    DestValue: {x: 0, y: 315, z: 0}
+    StartValueFloat: 0
+    DestValueFloat: 0
+    Duration: 0.5
+    Loop: 1
+  - m_AniType: 5
+    U3DCurve:
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 0
+      m_PostInfinity: 0
+    Target: {fileID: 0}
+    TartgetWidget: {fileID: 11400002}
+    TargetPanel: {fileID: 0}
+    StartValue: {x: 0, y: 0, z: 0}
+    DestValue: {x: 0, y: 0, z: 0}
+    StartValueFloat: 0
+    DestValueFloat: 1
+    Duration: 0.5
+    Loop: 1
+  - m_AniType: 2
+    U3DCurve:
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+      m_PreInfinity: 0
+      m_PostInfinity: 0
+    Target: {fileID: 400000}
+    TartgetWidget: {fileID: 0}
+    TargetPanel: {fileID: 0}
+    StartValue: {x: 0, y: 0, z: 1}
+    DestValue: {x: 1, y: 1, z: 1}
+    StartValueFloat: 0
+    DestValueFloat: 0
+    Duration: 0.5
+    Loop: 1
+  - m_AniType: 1
+    U3DCurve:
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 10
+      - time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 10
+      m_PreInfinity: 1
+      m_PostInfinity: 1
+    Target: {fileID: 400000}
+    TartgetWidget: {fileID: 0}
+    TargetPanel: {fileID: 0}
+    StartValue: {x: 0, y: 0, z: -360}
+    DestValue: {x: 0, y: 0, z: 0}
+    StartValueFloat: 0
+    DestValueFloat: 0
+    Duration: 1
+    Loop: 1
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
+  topAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
+  mColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 0.9927143
+  mPivot: 4
+  mWidth: 632
+  mHeight: 186
+  mDepth: 2
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  mAtlas: {fileID: 11400000, guid: 4d9cee90427c5448bb8b550521c8b68e, type: 2}
+  mSpriteName: zhuceye_02
+  mFillCenter: 1
+  mType: 0
+  mFillDirection: 4
+  mFillAmount: 1
+  mInvert: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
