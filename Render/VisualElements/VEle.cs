@@ -343,7 +343,7 @@ namespace CX
 		{
 			// 判断 元素相对视图的位置 是否有变化
 			// 只有当矩阵标记为没变时，才需要检测
-			//if (!m_MatrixChanged)
+			if (!m_MatrixChanged)
 			{
 				// transform变化时
 				if (this.cachedTrans.hasChanged)
@@ -360,8 +360,6 @@ namespace CX
 							m_MatrixNeedUpdate = false;
 							// 标识矩阵未变化
 							m_MatrixChanged = false;
-
-							Debug.Log("矩阵未变化");
 						}
 						else
 						{

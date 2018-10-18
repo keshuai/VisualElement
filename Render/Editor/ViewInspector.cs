@@ -17,34 +17,41 @@ namespace CXEditor
 
 		CXInspectorLayoutColorFrame m_AssetsFrame = new CXInspectorLayoutColorFrame("Assets");
 		CXInspectorLayoutColorFrame[] m_FrameArray;
+		CXInspectorLayoutColorFrame[] frameArray
+		{
+			get
+			{
+				if (m_FrameArray == null)
+				{
+					m_FrameArray = new CXInspectorLayoutColorFrame[View.assetMaxCount];
+					for (int i = 0; i < View.assetMaxCount; ++i)
+					{
+						m_FrameArray[i] = new CXInspectorLayoutColorFrame("Asset " + i);
+						m_FrameArray[i].NoSwitch = true;
+					}
+				}
+
+				return m_FrameArray;
+			}
+		}
 
 		// button +
-		private GUIContent m_IconToolbarPlus;
-
+		//protected GUIContent m_IconToolbarPlus;
 
 		//List<System.Type> m_SupportedTypeList = new List<System.Type>() { typeof(ViewAsset), typeof(ViewAsset) };
 
 		protected override void Awake ()
 		{
 			base.Awake();
-			
-			m_IconToolbarPlus = new GUIContent(EditorGUIUtility.IconContent("Toolbar Plus"));// "+"
-
 			_this = (View)this.target;
-			m_FrameArray = new CXInspectorLayoutColorFrame[View.assetMaxCount];
-			for (int i = 0; i < View.assetMaxCount; ++i)
-			{
-				m_FrameArray[i] = new CXInspectorLayoutColorFrame("Asset " + i);
-				m_FrameArray[i].NoSwitch = true;
-			}
+
+			//m_IconToolbarPlus = new GUIContent(EditorGUIUtility.IconContent("Toolbar Plus"));// "+"
 		}
 
 		public override void OnInspectorGUI()
 		{
-			
 			this.InspectorAssets();
 			base.OnInspectorGUI();
-
 		}
 		
 		private void InspectorAssets ()
@@ -60,7 +67,7 @@ namespace CXEditor
 		private void InspercAsset(int index)
 		{
 			ViewAsset asset = _this.GetAsset(index);
-			CXInspectorLayoutColorFrame frame = m_FrameArray[index];
+			CXInspectorLayoutColorFrame frame = frameArray[index];
 			if (asset == null) frame.title = "Asset " + index + " Empty NULL";
 			else if (asset.assetType == ViewAssetType.Empty) frame.title = "Asset " + index + " [Empty]";
 			else if (asset.assetType == ViewAssetType.ImageAtlas) frame.title = "Asset " + index + " [Image Atlas]";

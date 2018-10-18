@@ -51,7 +51,7 @@ namespace CXEditor
 		Drawcall _thisDrawcall;
 
 		// 添加按钮文本
-		private GUIContent m_IconToolbarPlus;
+		protected GUIContent m_IconToolbarPlus;
 		private System.Type m_AddType = null;
 
 		CXInspectorLayoutColorFrame m_DrawShaderFrame = new CXInspectorLayoutColorFrame("DrawcallInfo");
