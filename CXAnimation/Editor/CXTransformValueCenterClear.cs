@@ -17,7 +17,7 @@ public class CXTransformValueCenterClear
 	}
 	private static void hierarchyChanged ()
 	{
-		Debug.Log("hierarchyChanged");
+		//Debug.Log("hierarchyChanged");
 	}
 	private static void pauseStateChanged (PauseState s)
 	{
@@ -45,7 +45,7 @@ public class CXTransformValueCenterClear
     {
 		if(EditorApplication.isPlaying && EditorApplication.isCompiling)// && EditorApplication.isPlaying)
         {
-			Debug.Log("isCompiling");
+			//Debug.Log("isCompiling");
 			EditorApplication.isPaused = true;
 
             //UnityEngine.Object.DestroyImmediate(CXTransformValueCenter.Instance);
