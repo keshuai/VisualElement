@@ -339,15 +339,27 @@ namespace CX
 		void EachVELateUpdate ()
 		{
 			// update each visual element
-			int index = 0;
-			int count = m_ElementIndexArray.Count;
 			VEle e;
+			int count = m_ElementIndexArray.Count;
 
+			// 对每个显示的元素进行更新
+			int index = 0;
 			while(index < count)
 			{
 				e = m_ElementIndexArray[index];
 				// 显示才执行更新操作
 				if (e != null && e.Show) e.DoLateUpdate();
+				++index;
+			}
+
+			// 将每个显示的元素的transform changed 设为false
+			// 在此处进行设置 避免多个元素共用一个transform时矩阵判断出错
+			index = 0;
+			while(index < count)
+			{
+				e = m_ElementIndexArray[index];
+				// 显示才执行更新操作
+				if (e != null && e.Show) e.cachedTrans.hasChanged = false;
 				++index;
 			}
 		}

@@ -194,29 +194,11 @@ namespace CX
 		{
 			if (m_MatrixNeedUpdate)
 			{
-				m_Matrix = m_DrawCall.WorldToLocalMatrix * this.transform.localToWorldMatrix;
-
-				m_MatrixChanged = false;
-				this.transform.hasChanged = false;
+				m_Matrix = m_DrawCall.WorldToLocalMatrix * this.cachedTrans.localToWorldMatrix;
 				m_MatrixNeedUpdate = true;
 			}
 
 			return m_Matrix;
-
-//			if (m_MatrixChanged)
-//			{
-//				m_MatrixChanged = false;
-//				this.transform.hasChanged = false;
-//
-//				m_Matrix = this.transform.localToWorldMatrix;
-//
-//				if (m_NotInChildRoot || Application.isEditor)
-//				{
-//					m_Matrix = m_DrawCall.transform.worldToLocalMatrix * m_Matrix;
-//				}
-//			}
-//
-//			return m_Matrix;
 		}
 
 		protected Matrix4x4 GetScaleMatrix ()
@@ -244,18 +226,7 @@ namespace CX
 
 		protected Matrix4x4 GetGizmosMatrix ()
 		{
-			return this.transform.localToWorldMatrix;
-//			if (m_NotInChildRoot)
-//			{
-//				return this.transform.localToWorldMatrix;
-//			}
-//
-//			if (Application.isEditor)
-//			{
-//				return this.transform.localToWorldMatrix;
-//			}
-//
-//			return m_DrawCall.transform.worldToLocalMatrix * this.transform.localToWorldMatrix;
+			return this.cachedTrans.localToWorldMatrix;
 		}
 
 		//--------------------------------------------------------------------------------------------------------------
@@ -293,7 +264,7 @@ namespace CX
 
 		void Start()
 		{
-			cachedTrans = this.transform;
+			//cachedTrans = this.transform;
 			this.CheckView();
 		}
 
@@ -307,6 +278,7 @@ namespace CX
 				{
 					view.AddElement(this);
 					m_MatrixChanged = true;
+					m_UVChanged = true;
 					m_ColorChanged = true;
 				}
 			}
@@ -318,6 +290,7 @@ namespace CX
 					m_DrawCall = null;
 					view.AddElement(this);
 					m_MatrixChanged = true;
+					m_UVChanged = true;
 					m_ColorChanged = true;
 				}
 			}
@@ -370,7 +343,7 @@ namespace CX
 		{
 			// 判断 元素相对视图的位置 是否有变化
 			// 只有当矩阵标记为没变时，才需要检测
-			if (!m_MatrixChanged)
+			//if (!m_MatrixChanged)
 			{
 				// transform变化时
 				if (this.cachedTrans.hasChanged)
