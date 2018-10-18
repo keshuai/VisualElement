@@ -15,11 +15,6 @@ using UnityEditorInternal.VersionControl;
 
 public class CXEditorTools
 {
-	public static void OpenFolder ( string path )
-	{
-		System.Diagnostics.Process.Start ( path );
-	}
-		
 	[MenuItem ("CX/GameObject/查看对象拥有的脚本全名")]
 	private static void PrintAllScriptName () 
 	{

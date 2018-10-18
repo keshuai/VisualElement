@@ -40,7 +40,7 @@ public class CXClickLongPressGesture : CXTouchEvent
 		}
 
 		gesture.GestureDelegate = gestureDelegate;
-		gesture.widget = w;
+		gesture.element = w;
 		return gesture;
 	}
 

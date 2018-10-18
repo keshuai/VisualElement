@@ -376,37 +376,37 @@ public class CXTouchParser : MonoBehaviour
 			return false;
 		}
 
-		if (touchEvent1.panel == null)
+		if (touchEvent1.view == null)
 		{
-			return touchEvent2.panel != null;
+			return touchEvent2.view != null;
 		}
 
-		if (touchEvent2.panel == null)
-		{
-			return false;
-		}
-
-		if (touchEvent1.panel.RenderQueue > touchEvent2.panel.RenderQueue)
+		if (touchEvent2.view == null)
 		{
 			return false;
 		}
 
-		if (touchEvent1.panel.RenderQueue < touchEvent2.panel.RenderQueue)
+		if (touchEvent1.view.RenderQueue > touchEvent2.view.RenderQueue)
+		{
+			return false;
+		}
+
+		if (touchEvent1.view.RenderQueue < touchEvent2.view.RenderQueue)
 		{
 			return true;
 		}
 
-		if (touchEvent1.widget == null)
+		if (touchEvent1.element == null)
 		{
-			return touchEvent2.widget != null;
+			return touchEvent2.element != null;
 		}
 
-		if (touchEvent2.widget == null)
+		if (touchEvent2.element == null)
 		{
 			return false;
 		}
 
-		return touchEvent2.widget.depth > touchEvent1.widget.depth;
+		return touchEvent2.element.depth > touchEvent1.element.depth;
 
 		/*
 		UIWidget w2 = t2.collider.GetComponent<UIWidget>();

@@ -107,7 +107,7 @@ namespace CX
 
 		private void Start()
 		{
-			this.widget = m_Frame;
+			this.element = m_Frame;
 		}
 		
 		// fields

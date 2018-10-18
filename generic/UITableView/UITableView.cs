@@ -135,7 +135,7 @@ public class UITableView : MonoBehaviour
 		this.Viewport.transform.localPosition = Vector3.zero;
 		this.Viewport.TableView = this;
 		this.Viewport.ViewPanel = this.Panel;
-		this.Viewport.widget = this.BackgroundSprite;
+		this.Viewport.element = this.BackgroundSprite;
 
 		this.CellTrans = new GameObject("1_cellList").transform;
 		this.CellTrans.parent = this.Panel.ChildRoot;

@@ -8,12 +8,12 @@ using System.Collections;
 
 public class CXTouchEvent : MonoBehaviour
 {
-	[SerializeField] private CX.Drawcall _panel;
-	[SerializeField] public CX.VEle widget;
-	public CX.Drawcall panel 
+	[SerializeField] private CX.Drawcall _view;
+	[SerializeField] public CX.VEle element;
+	public CX.Drawcall view 
 	{
-		get { return this.widget == null? _panel : this.widget.Drawcall; }
-		set { _panel = value; }
+		get { return this.element == null? _view : this.element.Drawcall; }
+		set { _view = value; }
 	}
 
 	public virtual void OnTouchEvent ( CXTouchParser touchParser, CXTouch touch ){}

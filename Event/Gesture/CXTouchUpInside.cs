@@ -46,7 +46,7 @@ public class CXTouchUpInside : CXTouchEvent
 		w.autoResizeBoxCollider = autoResizeBoxCollider;
 
 		gesture.SetEvent(pressedAction, clickedAction, canceledAction );
-		gesture.widget = w;
+		gesture.element = w;
 		return gesture;
 	}
 

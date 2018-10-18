@@ -53,7 +53,7 @@ public class CXGestureTouchBegin : CXTouchEvent
 		collider.size = colliderSize;
 
 		gesture.GestureDelegate = gestureDelegate;
-		gesture.widget = w;
+		gesture.element = w;
 		return gesture;
 	}
 
