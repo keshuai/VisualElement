@@ -68,6 +68,7 @@ namespace CX
 			if (m_ColorChanged)
 			{
 				m_ColorChanged = false;
+				this.MarkNeedUpdate();
 
 				int vertexIndex = this.internalVertexIndex;
 				List<Color> colList = m_DrawCall.m_ColList;

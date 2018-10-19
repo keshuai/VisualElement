@@ -15,7 +15,7 @@ namespace CX
 		ImageAtlas = 1,
 		TTF = 2,
 	}
-	[ExecuteInEditMode]
+
 	[System.Serializable]
 	public class ViewAsset 
 	{

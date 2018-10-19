@@ -9,9 +9,8 @@ using System.Collections.Generic;
 
 namespace CX
 {
-	/// 绘制类. 一个绘制实例占一个drawcall,可能绘制一个或多个元素
-	/// 注意事项: drawcall会使用属性this.transform.hasChanged, 如果其他脚本对其进行赋值, 可能会产生冲突.
-	/// 注意事项: 不要使用VE的transform.parent查找, 在真机运行时, drawcall与ve的父子关系会断开以便程序更快的运行
+	/// 渲染类. 一个渲染实例占一个drawcall, 可能渲染一个或多个元素
+	/// 注意事项: drawcall会使用属性this.transform.hasChanged, 如果其他脚本对其进行赋值, 可能会产生冲突, 使得渲染不正常
 	public abstract class Drawcall : MonoBehaviour
 	{
 		private Matrix4x4 m_Matrix;
@@ -20,11 +19,12 @@ namespace CX
 		{
 			get
 			{
-				return this.transform.worldToLocalMatrix;
+				return this.cachedTrans.worldToLocalMatrix;
 			}
 		}
 
 		/// 子组件的root 
+		/// 自身transform的缓存 
 		[SerializeField][HideInInspector] internal Transform cachedTrans;
 
 		/// 裁剪
@@ -95,10 +95,11 @@ namespace CX
 		public static Shader DefaultShader { get { if (s_DefaultShader == null) s_DefaultShader = Shader.Find("UIView"); return s_DefaultShader;}}
 		public static Shader DefaultClipShader { get { if (s_DefaultClipShader == null) s_DefaultClipShader = Shader.Find("UIViewClip"); return s_DefaultClipShader;}}
 
-		// auto change in run time
-		private bool m_NeedUpdate = true;
+		/// auto change in run time
+		/// 是否需要更新Mesh
+		private bool m_NeedUpdateMesh = true;
 
-		/// 
+		/// 是否需要更新三角形索引
 		[SerializeField]private bool m_NeedUpdateVertexIndex = false;
 
 		/// 重写一个集合 支持 字典的快速包含判断 List的增删查改 再加双List的双重顺序
@@ -137,7 +138,7 @@ namespace CX
 		{
 			get
 			{
-				return m_NeedUpdate;
+				return m_NeedUpdateMesh;
 			}
 		}
 
@@ -149,17 +150,22 @@ namespace CX
 			}
 		}
 
+		/// 标记为需要更新Mesh 
 		public void MarkNeedUpdate ()
 		{
-			m_NeedUpdate = true;
+			m_NeedUpdateMesh = true;
 		}
 
+		/// 标记为需要更新三角形索引 
 		public void MarkNeedUpdateVertexIndex ()
 		{
+			/// 三角形索引 需要更新 
 			m_NeedUpdateVertexIndex = true;
-			m_NeedUpdate = true;
+			/// mesh 需要更新
+			m_NeedUpdateMesh = true;
 		}
 
+		/// 当前视图的渲染队列
 		public int RenderQueue
 		{
 			get
@@ -254,6 +260,7 @@ namespace CX
 
 		void Awake ()
 		{
+			/// 缓存transform
 			this.cachedTrans = this.transform;
 
 			this.CheckMat();
@@ -335,7 +342,7 @@ namespace CX
 			}
 		}
 		
-		// 每帧执行
+		// 每帧执行每个元素的更新
 		void EachVELateUpdate ()
 		{
 			// update each visual element
@@ -350,6 +357,8 @@ namespace CX
 				// 显示才执行更新操作
 				if (e != null && e.Show) e.DoLateUpdate();
 				++index;
+
+
 			}
 
 			// 将每个显示的元素的transform changed 设为false
@@ -364,9 +373,12 @@ namespace CX
 			}
 		}
 
+		/// 更新View的三角形顶点索引
+		/// 当层级发生变化时 
+		/// 当顶点数发生变化时
+		/// 当显隐发生变化时
 		void UpdateVertexIndexArray ()
 		{
-			Debug.Log("View Update index");
 			m_TriList.Clear();
 			VEle e;
 			for (int i = 0; i < m_DepthIndexArray.Count; ++i)
@@ -401,18 +413,19 @@ namespace CX
 			}
 
 			// 矩阵更新
-			if (this.transform.hasChanged)
+			if (this.cachedTrans.hasChanged)
 			{
-				m_Matrix = this.transform.localToWorldMatrix;
-				this.transform.hasChanged = false;
+				m_Matrix = this.cachedTrans.localToWorldMatrix;
+				this.cachedTrans.hasChanged = false;
 			}
 				
-			//if (m_NeedUpdate)
+			if (m_NeedUpdateMesh)
 			{
+				Debug.Log("View UpdateMesh");
 				// 更新绘制信息到Mesh
 				this.UpdateMesh(m_VerList, m_UVList, m_ColList, m_TriList);
 				// 更新标识复位
-				m_NeedUpdate = false;
+				m_NeedUpdateMesh = false;
 			}
 			
 			// 进行绘制调用

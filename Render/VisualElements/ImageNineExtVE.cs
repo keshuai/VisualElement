@@ -10,6 +10,7 @@ namespace CX
 {
 	/// 九宫格延展
 	/// 居中显示, 通过水平方向和垂直方向来延展
+
 	public class ImageNineExtVE : ImageVE 
 	{
 		[SerializeField][HideInInspector] private Color m_Color = Color.white;
@@ -48,9 +49,7 @@ namespace CX
 				if (m_Hor != value)
 				{
 					m_Hor = value;
-
 					m_HorVerChanged = true;
-					m_DrawCall.MarkNeedUpdate();
 				}
 			}
 		}
@@ -71,9 +70,7 @@ namespace CX
 				if (m_Ver != value)
 				{
 					m_Ver = value;
-
 					m_HorVerChanged = true;
-					m_DrawCall.MarkNeedUpdate();
 				}
 			}
 		}
@@ -379,6 +376,8 @@ namespace CX
 				m_ScaleChanged = false;
 				m_UVChanged = false;
 
+				this.MarkNeedUpdateVertexIndex();
+
 				if (m_ImageInfo != null)
 				{
 					this.FullUpdatePositionUV();
@@ -406,28 +405,30 @@ namespace CX
 	
 		protected override void virtualLateUpdate ()
 		{
+			// 改变缓冲区大小
 			if (m_HorVerChanged)
 			{
-				// 上下左右 4* 4 = 16
+				// 上下左右 4 * 4 = 16
 				// 水平方向 m_Hor * 8
 				// 垂直方向 m_Ver * 8;           
 				// 中间双 m_Hor * m_Ver * 4;
 				int newVertexCount = 16 + (m_Hor + m_Ver)* 8 + m_Hor * m_Ver * 4;
+				// 缓冲区容量变大时扩充
+				// 缓冲区容量变小时暂不处理
 				if (newVertexCount > this.internalVertexCount)
 				{
+					// 新增定点 需要新增颜色
 					m_ColorChanged = true;
 				}
 
+				// 进行扩容
 				m_DrawCall.ElementVertexCountChangedOnUpdate(this, this.internalVertexCount, newVertexCount);
 			}
 
-			if (m_UVChanged)
-			{
-				this.MarkNeedUpdateVertexIndex();
-			}
-				
+			// 更新位置与UV
 			this.UpdatePositionUV();
 
+			// 更新颜色
 			if (m_ColorChanged)
 			{
 				this.UpdateColor();

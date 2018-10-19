@@ -64,6 +64,9 @@ namespace CXEditor
 			_this.Alpha = EditorUILayout.RangeField("Alpha", _this.Alpha, 0 ,1);
 			_this.Scale = EditorUILayout.FloadField("Scale", _this.Scale);
 			//_this.NotInChildRoot = EditorUILayout.BoolField("NotInChildRoot", _this.NotInChildRoot);
+
+			// 触发 ExecuteInEditMode 更新
+			EditorUtility.SetDirty(target);
 		} 
 	}
 }
