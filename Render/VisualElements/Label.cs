@@ -165,19 +165,17 @@ namespace CX
 		{
 			base.virtualLateUpdate ();
 
-			if (this.Show)
+			Font font = this.TTFFont;
+			if (font != null)
 			{
-				//if (m_TextChanged)
+				if (m_TextChanged)
 				{
 					m_DrawCall.ElementVertexCountChangedOnUpdate(this, this.internalVertexCount, this.currentVertexCount);
 
+					if (!string.IsNullOrEmpty(m_Text))
+						font.RequestCharactersInTexture(m_Text, this.fontSize, this.fontStyle);
 				}
-				//if (m_TextChanged && !string.IsNullOrEmpty(m_Text))
-				{
-					Font font = this.TTFFont;
-					if (font != null) font.RequestCharactersInTexture(m_Text, this.fontSize, this.fontStyle);
-				}
-				if (this.TTFFont != null)
+
 				this.FullUpdate();
 			}
 		}

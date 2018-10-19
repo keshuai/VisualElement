@@ -67,6 +67,10 @@ namespace CXEditor
 
 			// 触发 ExecuteInEditMode 更新
 			EditorUtility.SetDirty(target);
+			if (_this.Drawcall != null)
+			{
+				EditorUtility.SetDirty(_this.Drawcall);
+			}
 		} 
 	}
 }
