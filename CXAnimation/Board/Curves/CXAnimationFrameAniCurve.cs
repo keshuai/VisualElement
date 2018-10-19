@@ -6,28 +6,23 @@ using UnityEngine;
 using System.Collections;
 
 
-public class CXAnimationNguiPanelAlpha : CXAnimationCurve 
+public class CXAnimationFrameAniCurve : CXAnimationCurve 
 {
-	public CX.View Target;
+	public CX.ImageVE Target;
 
 	public float StartDelay;
-	public float StartValue;
-	public float DestValue;
+	public string Prefix;
+	public int StartIndex;
+	public int EndIndex;
+	public float Scale;
 	public float Duration = 0.5f;
 	public bool Loop = false;
-	[SerializeField][HideInInspector]
-	public AnimationCurve U3DCurve;
 
-	private CXTransformFloatU3DCurve m_Curve = null;
+	private CXTransformFrameAni m_Curve = null;
 
 	public override object Ani_Target { get { if (!this.Target) { this.Target = null; } return this.Target; } }
 	public override bool Ani_Loop { get { return this.Loop; } }
 	public override float Ani_Duration { get { return this.Duration; } }
-
-	private void SetValue(float v)
-	{
-		//this.Target.alpha = v;
-	}
 
 	public override void Play ()
 	{
@@ -47,13 +42,12 @@ public class CXAnimationNguiPanelAlpha : CXAnimationCurve
 	{
 		if (m_Curve == null)
 		{
-			m_Curve = new CXTransformFloatU3DCurve();
+			m_Curve = new CXTransformFrameAni();
 			m_Curve.AttachObject = this;
-			m_Curve.AddSetDelegate(this.SetValue);
 			m_Curve.AddCallBack(this._PlayEnd);
 		}
 
-		m_Curve.Init(this.StartValue, this.DestValue, this.Duration, this.U3DCurve);
+		m_Curve.Init(this.Target, this.Prefix, this.StartIndex, this.EndIndex, this.Duration);
 		m_Curve.Loop = this.Loop;
 		m_Curve.MakeItAlive();
 	}

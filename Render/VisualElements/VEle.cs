@@ -29,11 +29,11 @@ namespace CX
 		/// 使用的Asset资源
 		[SerializeField][HideInInspector] protected ViewAsset m_Asset;
 		/// 关联的Asset index 
-		[SerializeField][HideInInspector] internal int internalAssetIndex = 0;
+		[SerializeField][HideInInspector] internal int internalAssetIndex = -1;
 		/// Drawcall: id in drawcall
-		[SerializeField][HideInInspector] internal int internalDepthIndex = 0;
+		[SerializeField][HideInInspector] internal int internalDepthIndex = -1;
 		/// Drawcall: id in drawcall
-		[SerializeField][HideInInspector] internal int internalElementIndex = 0;
+		[SerializeField][HideInInspector] internal int internalElementIndex = -1;
 		/// Drawcall: vertex id in drawcall
 		[SerializeField][HideInInspector] internal int internalVertexIndex;
 		/// Drawcall: vertex count

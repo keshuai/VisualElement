@@ -42,11 +42,11 @@ public class CXAnimationBoardInspector : Editor
 		typeof(CXAnimationTransShakeLocalRotation),
 		typeof(CXAnimationTransShakeLocalScale),
 
-		typeof(CXAnimationNguiWidgetAlphaCurve),
-		typeof(CXAnimationNguiAllWidgetAlpha),
-		typeof(CXAnimationNguiPanelAlpha),
-		typeof(CXAnimationNguiWidgetColorCurve),
-		typeof(CXAnimationNguiFrameAniCurve),
+		typeof(CXAnimationElementAlphaCurve),
+		typeof(CXAnimationAllElementAlpha),
+		typeof(CXAnimationViewAlpha),
+		typeof(CXAnimationElementColorCurve),
+		typeof(CXAnimationFrameAniCurve),
 
 		typeof(CXAnimationParticleSystemCurve),
 
@@ -334,25 +334,25 @@ public class CXAnimationBoardInspector : Editor
 					ShowCurve_TransShake((CXAnimationTransShake)curve);
 				}
 
-				else if (curve is CXAnimationNguiWidgetAlphaCurve)
+				else if (curve is CXAnimationElementAlphaCurve)
 				{
-					ShowCurve_NguiWidgetAlpha((CXAnimationNguiWidgetAlphaCurve)curve);
+					ShowCurve_NguiWidgetAlpha((CXAnimationElementAlphaCurve)curve);
 				}
-				else if (curve is CXAnimationNguiAllWidgetAlpha)
+				else if (curve is CXAnimationAllElementAlpha)
 				{
-					ShowCurve_AllNguiWidgetAlpha((CXAnimationNguiAllWidgetAlpha)curve);
+					ShowCurve_AllNguiWidgetAlpha((CXAnimationAllElementAlpha)curve);
 				}
-				else if (curve is CXAnimationNguiPanelAlpha)
+				else if (curve is CXAnimationViewAlpha)
 				{
-					ShowCurve_NguiPanelAlpha((CXAnimationNguiPanelAlpha)curve);
+					ShowCurve_NguiPanelAlpha((CXAnimationViewAlpha)curve);
 				}
-				else if (curve is CXAnimationNguiWidgetColorCurve)
+				else if (curve is CXAnimationElementColorCurve)
 				{
-					ShowCurve_NguiWidgetColor((CXAnimationNguiWidgetColorCurve)curve);
+					ShowCurve_NguiWidgetColor((CXAnimationElementColorCurve)curve);
 				}
-				else if (curve is CXAnimationNguiFrameAniCurve)
+				else if (curve is CXAnimationFrameAniCurve)
 				{
-					ShowCurve_NguiFrameAni((CXAnimationNguiFrameAniCurve)curve);
+					ShowCurve_NguiFrameAni((CXAnimationFrameAniCurve)curve);
 				}
 
 				else if (curve is CXAnimationLocalBezierCurve)
@@ -413,7 +413,7 @@ public class CXAnimationBoardInspector : Editor
 		ani.U3DCurve = CXEditorInspector.CurveField("Curve", ani.U3DCurve);
 	}
 
-	private void ShowCurve_NguiWidgetAlpha(CXAnimationNguiWidgetAlphaCurve ani)
+	private void ShowCurve_NguiWidgetAlpha(CXAnimationElementAlphaCurve ani)
 	{
 		ani.Name = EditorGUILayout.TextField("Name", ani.Name);
 		ani.StartDelay = EditorGUILayout.FloatField("StartDelay", ani.StartDelay);
@@ -426,7 +426,7 @@ public class CXAnimationBoardInspector : Editor
 	}
 
 
-	private void ShowCurve_AllNguiWidgetAlpha(CXAnimationNguiAllWidgetAlpha ani)
+	private void ShowCurve_AllNguiWidgetAlpha(CXAnimationAllElementAlpha ani)
 	{
 		ani.Name = EditorGUILayout.TextField("Name", ani.Name);
 		ani.StartDelay = EditorGUILayout.FloatField("StartDelay", ani.StartDelay);
@@ -439,7 +439,7 @@ public class CXAnimationBoardInspector : Editor
 	}
 
 
-	private void ShowCurve_NguiPanelAlpha(CXAnimationNguiPanelAlpha ani)
+	private void ShowCurve_NguiPanelAlpha(CXAnimationViewAlpha ani)
 	{
 		ani.Name = EditorGUILayout.TextField("Name", ani.Name);
 		ani.StartDelay = EditorGUILayout.FloatField("StartDelay", ani.StartDelay);
@@ -451,7 +451,7 @@ public class CXAnimationBoardInspector : Editor
 		ani.Loop = EditorGUILayout.Toggle("Loop", ani.Loop);
 	}
 
-	private void ShowCurve_NguiWidgetColor(CXAnimationNguiWidgetColorCurve ani)
+	private void ShowCurve_NguiWidgetColor(CXAnimationElementColorCurve ani)
 	{
 		ani.Name = EditorGUILayout.TextField("Name", ani.Name);
 		ani.StartDelay = EditorGUILayout.FloatField("StartDelay", ani.StartDelay);
@@ -464,7 +464,7 @@ public class CXAnimationBoardInspector : Editor
 	}
 
 
-	private void ShowCurve_NguiFrameAni(CXAnimationNguiFrameAniCurve ani)
+	private void ShowCurve_NguiFrameAni(CXAnimationFrameAniCurve ani)
 	{
 		ani.Name = EditorGUILayout.TextField("Name", ani.Name);
 		ani.StartDelay = EditorGUILayout.FloatField("StartDelay", ani.StartDelay);

@@ -6,9 +6,9 @@ using UnityEngine;
 using System.Collections;
 
 
-public class CXAnimationNguiAllWidgetAlpha : CXAnimationCurve 
+public class CXAnimationElementAlphaCurve : CXAnimationCurve
 {
-	public GameObject Target;
+	public CX.VEle Target;
 
 	public float StartDelay;
 	public float StartValue;
@@ -26,11 +26,7 @@ public class CXAnimationNguiAllWidgetAlpha : CXAnimationCurve
 
 	private void SetValue(float v)
 	{
-		//UIWidget[] ws = this.Target.GetComponents<UIWidget>();
-		//foreach (UIWidget w in ws)
-		//{
-		//	w.alpha = v;
-		//}
+		this.Target.Alpha = v;
 	}
 
 	public override void Play ()
