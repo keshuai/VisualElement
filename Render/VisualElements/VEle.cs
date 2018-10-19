@@ -383,7 +383,11 @@ namespace CX
 			// 更新状态
 			this.virtualLateUpdate();
 
-			m_MatrixChanged = false;
+			if (m_MatrixChanged)
+			{
+				this.MarkNeedUpdate();
+				m_MatrixChanged = false;
+			}
 		}
 	}
 }

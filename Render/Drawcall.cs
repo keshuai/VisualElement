@@ -255,8 +255,6 @@ namespace CX
 		/// Shader改变时调用
 		protected virtual void VirtualShaderChanged ()
 		{}
-		/// 触发NeedUpdate时, LateUpdate调用 
-		protected abstract void LateUpdateRenderInfo ();
 
 		void Awake ()
 		{

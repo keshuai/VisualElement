@@ -78,7 +78,7 @@ namespace CXEditor
 			this.DrawVEList();
 			this.DrawMeshMatInspector();
 
-			_thisDrawcall.MarkNeedUpdate();
+			//_thisDrawcall.MarkNeedUpdate();
 		}
 
 		void DrawClip()
@@ -225,12 +225,6 @@ namespace CXEditor
 				EditorGUILayout.ObjectField("Material", _this.Mat, typeof(Material), true);
 			}
 			m_DrawcallInfoFrame.End();
-		}
-
-		// 监视面板无法确定是否修改的数据, 在编辑器监视版下 强制刷新
-		protected void UpdateMesh ()
-		{
-			EasyReflect.CallMethod(this.target, "LateUpdateRenderInfo");
 		}
 	}
 }

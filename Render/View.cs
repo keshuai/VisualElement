@@ -298,24 +298,5 @@ namespace CX
 			base.VirtualShaderChanged ();
 			this.SetFontTextureToMat();
 		}
-		protected override void LateUpdateRenderInfo ()
-		{
-			//m_VerList.Clear();
-			//m_UVList.Clear();
-			//m_ColList.Clear();
-			//m_TriList.Clear();
-
-			foreach(VEle ve in m_ElementIndexArray)
-			{
-				if (ve.Show)
-				{
-					//ve.virtualUpdateUnLightMesh(m_VerList, m_UVList, m_ColList, m_TriList);
-				}
-			}
-
-			this.UpdateMesh(m_VerList, m_UVList, m_ColList, m_TriList);
-			//this.UpdateMesh(m_VerList.ToArray(), m_UVList.ToArray(), m_ColList.ToArray(), m_TriList.ToArray());
-			Debug.Log("update mesh");
-		}
 	}
 }
