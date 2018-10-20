@@ -390,7 +390,7 @@ namespace CX
 			m_ColorChanged = false;
 
 			Color c = m_Color;
-			c.a = m_Alpha;
+			c.a *= m_Alpha;
 			//Color c = new Color(1f, 1f, 1f, m_Alpha);
 			List<Color> colList = m_DrawCall.m_ColList;
 

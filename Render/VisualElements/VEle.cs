@@ -8,6 +8,14 @@ using System.Collections.Generic;
 
 namespace CX
 {
+
+	/// TODO
+	/// copy value
+	/// copy reference
+
+	/// VE 又可以根据静态缓冲区与动态缓冲区 分为两类
+	/// 动态的更复杂 且更耗性能 
+
 	[ExecuteInEditMode]
 	public abstract class VEle : MonoBehaviour 
 	{		
@@ -271,6 +279,7 @@ namespace CX
 		// 检查View
 		public void CheckView ()
 		{
+			// 新创建的
 			if (m_DrawCall == null)
 			{
 				View view = this.GetComponentInParent<View>();
@@ -285,8 +294,10 @@ namespace CX
 			else
 			{
 				View view = this.GetComponentInParent<View>();
+				// 克隆的
 				if (!view.HasVEle(this))
 				{
+					// 初始化
 					m_DrawCall = null;
 					view.AddElement(this);
 					m_MatrixChanged = true;

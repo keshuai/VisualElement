@@ -16,6 +16,7 @@ namespace CX
 		TTF = 2,
 	}
 
+	// TODO 使用Mono重写ViewAsset对象
 	[System.Serializable]
 	public class ViewAsset 
 	{
@@ -84,6 +85,8 @@ namespace CX
 		}
 	}
 
+	/// TODO 加入alpha属性
+	/// 克隆之后的层级问题 需要解决 
 	[ExecuteInEditMode]
 	public class View : Drawcall
 	{
@@ -255,9 +258,13 @@ namespace CX
 				if (m_Assets[i].assetType == ViewAssetType.TTF)
 				{
 					// Rebuild Text
+					Debug.Log("OnTTFRebuild");
 					foreach(VEle e in m_DepthIndexArray)
 					{
-						e.MarkNeedUpdate();
+						if (e is Label)
+						{
+							((Label) e).textChanged = true;
+						}
 					}
 				}
 			}

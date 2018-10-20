@@ -1,0 +1,25 @@
+﻿Visual Element : 可视化元素, 用于渲染各种不同的元素
+
+
+View 渲染视图，一个视图一个drawcall
+{
+	assets : 当前视图所使用的所有资源
+	elements : 当前视图所管理的元素集合
+	alpha : 视图的alpha属性
+	clip : 裁剪
+	shader : 视图所使用的着色器，需要定制
+	renderQueue : 渲染层级
+}
+Element 元素
+{
+	view : 元素的渲染视图
+	elementAsset : 元素渲染所使用的资源
+	根据缓冲区大小是否会改变分
+	{
+		静态缓冲区
+		动态缓冲区
+	}
+}
+
+是使用属性赋值检测变化 : 此种方式 动画不兼容Unity内置的
+还是使用每帧判断检测 : 此种方式 兼容unity内置动画 但会带来更多计算

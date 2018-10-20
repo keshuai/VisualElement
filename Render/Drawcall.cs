@@ -123,7 +123,16 @@ namespace CX
 		public bool HasVEle(VEle e)
 		{
 			if (e == null) return false;
-			return m_DepthIndexArray.Contains(e);
+
+			//return m_DepthIndexArray.Contains(e);
+			int index0 = e.internalElementIndex;
+			int index1 = e.internalDepthIndex;
+
+			return 
+				index0 >= 0 && index0 < m_ElementIndexArray.Count &&
+				index1 >= 0 && index1 < m_DepthIndexArray.Count &&
+				m_ElementIndexArray[index0] == e &&
+				m_DepthIndexArray[index1] == e;
 		}
 
 		[SerializeField]internal List<Vector3> m_VerList = new List<Vector3>();

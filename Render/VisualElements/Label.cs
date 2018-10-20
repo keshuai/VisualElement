@@ -57,9 +57,13 @@ namespace CX
 		[SerializeField][HideInInspector] protected string m_Text;
 		// the label vertext count changed with text
 		[SerializeField][HideInInspector] protected int m_VertexCount = 0;
-		[SerializeField][HideInInspector] protected bool m_TextChanged = false;
+		[System.NonSerialized][HideInInspector] internal bool textChanged = true;// 默认需要重绘
+		[SerializeField][HideInInspector] protected bool m_EffectChanged = false;
 
+		[SerializeField][HideInInspector] protected Color m_Color = Color.white;
+		[SerializeField][HideInInspector] protected Color m_EffectColor = Color.white;
 
+		[SerializeField][HideInInspector] protected LabelEffect m_Effect;
 
 		public bool lockWidth;
 		public bool lockHeight;
@@ -71,9 +75,45 @@ namespace CX
 		public LabelAlignmentY alignmentY = LabelAlignmentY.Top;
 
 
-		public Color color = Color.white;
-		public LabelEffect effect;
-		public Color effectColor = Color.white;
+		public Color color 
+		{
+			get { return m_Color; }
+			set
+			{
+				if (m_Color != value)
+				{
+					m_Color = value;
+					m_ColorChanged = true;
+				}
+			}
+		}
+
+		public Color effectColor 
+		{
+			get { return m_EffectColor; }
+			set
+			{
+				if (m_EffectColor != value)
+				{
+					m_EffectColor = value;
+					m_ColorChanged = true;
+				}
+			}
+		}
+
+		public LabelEffect effect
+		{
+			get { return m_Effect; }
+			set
+			{
+				if (m_Effect != value)
+				{
+					m_Effect = value;
+					m_EffectChanged = true;
+				}
+			}
+		}
+
 		public Vector2 effectOffset = new Vector2(2, -1);
 
 		public FontStyle fontStyle;
@@ -101,7 +141,7 @@ namespace CX
 				if (m_Text != value)  
 				{ 
 					m_Text = value; 
-					m_TextChanged = true;
+					textChanged = true;
 					this.MarkNeedUpdate();
 				}
 			}
@@ -168,15 +208,32 @@ namespace CX
 			Font font = this.TTFFont;
 			if (font != null)
 			{
-				if (m_TextChanged)
+				if (textChanged || m_EffectChanged)
 				{
 					m_DrawCall.ElementVertexCountChangedOnUpdate(this, this.internalVertexCount, this.currentVertexCount);
 
-					if (!string.IsNullOrEmpty(m_Text))
-						font.RequestCharactersInTexture(m_Text, this.fontSize, this.fontStyle);
+					this.MarkNeedUpdateVertexIndex();
+					m_EffectChanged = false;
 				}
 
-				this.FullUpdate();
+				if (textChanged)
+				{
+					if (!string.IsNullOrEmpty(m_Text))
+					{
+						font.RequestCharactersInTexture(m_Text, this.fontSize, this.fontStyle);
+					}
+				}
+
+				if (this.MatrixChanged || textChanged || m_EffectChanged || m_ColorChanged)
+				{
+					Debug.Log("Label FullUpdate");
+					this.FullUpdate();
+
+					this.MarkNeedUpdate();
+					textChanged = false;
+					m_EffectChanged = false;
+					m_ColorChanged = false;
+				}
 			}
 		}
 
@@ -1086,7 +1143,20 @@ namespace CX
 
 		void UpdateColor ()
 		{
+//			m_ColorChanged = false;
 
+//			Color c = m_Color;
+//			c.a *= m_Alpha;
+//			//Color c = new Color(1f, 1f, 1f, m_Alpha);
+//			List<Color> colList = m_DrawCall.m_ColList;
+//
+//			int vertexIndex = this.internalVertexIndex;
+//			int vertexEnd = vertexIndex + this.internalVertexCount;
+//
+//			while(vertexIndex < vertexEnd)
+//			{
+//				colList[vertexIndex++] = c;
+//			}
 		}
 
 		void ResetLabelCharInfoArray ()
