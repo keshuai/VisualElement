@@ -59,7 +59,14 @@ public class UITableView : MonoBehaviour
 	public int ScrollBarDepth
 	{
 		get { return this.ScrollBar == null? 0 : this.ScrollBar.BackgroundVE.depth; }
-		set { if (this.ScrollBar != null) { this.ScrollBar.BackgroundVE.depth = value++; this.ScrollBar.ForegroundVE.depth = value; } }
+		set 
+		{ 
+			if (this.ScrollBar != null) 
+			{ 
+				//this.ScrollBar.BackgroundVE.depth = value++; 
+				//this.ScrollBar.ForegroundVE.depth = value; 
+			}
+		}
 	}
 
 	// colored the click
@@ -69,7 +76,11 @@ public class UITableView : MonoBehaviour
 	public int TouchDownSpriteDepth
 	{
 		get { return this.TouchDownSprite == null? 0 : this.TouchDownSprite.depth; }
-		set { if (this.TouchDownSprite != null) this.TouchDownSprite.depth = value; }
+		set 
+		{ 
+			//if (this.TouchDownSprite != null) 
+				//this.TouchDownSprite.depth = value; 
+		}
 	}
 	public bool EnableTouchDownColor
 	{
@@ -128,7 +139,7 @@ public class UITableView : MonoBehaviour
 
 		
 		this.BackgroundSprite = this.Panel.NewElement<RectColorVE>();//this.BackgroundSprite = CXUIPool.CreateSprite(this.transform);
-		this.BackgroundSprite.depth = 0;//this.BackgroundSprite.depth = -1;
+		//this.BackgroundSprite.depth = 0;//this.BackgroundSprite.depth = -1;
 		this.BackgroundSprite.name = "0_viewport";
 
 		this.Viewport = this.BackgroundSprite.gameObject.AddComponent<UITableViewport>();

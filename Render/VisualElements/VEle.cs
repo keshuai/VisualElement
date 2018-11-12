@@ -86,13 +86,6 @@ namespace CX
 		public int depth
 		{
 			get { return this.internalDepthIndex; }
-			set
-			{
-				if (m_DrawCall != null)
-				{
-					m_DrawCall.ElementIndexMoveToIndex(this, value);
-				}
-			}
 		}
 		
 

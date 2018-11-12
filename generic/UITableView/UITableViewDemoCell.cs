@@ -33,7 +33,7 @@ public class UITableViewDemoCell : UITableViewCell
 		this.Label.fontSize = 36;
 		this.Label.Width = 500;
 		this.Label.Height = 36;
-		this.Label.depth = 1;
+//		this.Label.depth = 1;
 	}
 }
 

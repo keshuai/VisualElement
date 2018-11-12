@@ -407,15 +407,52 @@ namespace CX
 			}
 		}
 
+		void UpdateDepth ()
+		{
+			VEle[] els = this.GetComponentsInChildren<VEle>();
+			int newCount = els.Length;
+			if (newCount == this.m_DepthIndexArray.Count)
+			{
+				// 个数相等 
+				// 检查顺序是否变化
+				bool needSort = false;
+				for (int i = 0; i < newCount; ++i)
+				{
+					els[i].internalDepthIndex = i;
+					if (els[i] != m_DepthIndexArray[i])
+					{
+						needSort = true;
+						//break;
+					}
+				}
+
+				if (needSort)
+				{
+					m_DepthIndexArray.Clear();
+					m_DepthIndexArray.AddRange(els);
+					m_NeedUpdateVertexIndex = true;
+				}
+			}
+			else
+			{
+				// 个数不等 需要重置
+			}
+		}
+
 		void LateUpdate ()
 		{
 			// 每个显示的元素进行自我更行(更新绘制信息)
 			this.EachVELateUpdate();
 
+			// 更新层次排序
+			this.UpdateDepth();
+
 			// 索引更新(层次及是否显示)
 			if (m_NeedUpdateVertexIndex)
 			{
 				m_NeedUpdateVertexIndex = false;
+				m_NeedUpdateMesh = true;// 层次更新后需要更新Mesh
+
 				this.UpdateVertexIndexArray();
 			}
 

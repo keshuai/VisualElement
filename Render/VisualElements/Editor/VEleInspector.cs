@@ -8,7 +8,7 @@ using UnityEditor;
 using CX;
 namespace CXEditor
 {
-	[CustomEditor(typeof(VEle))]
+	[CustomEditor(typeof(VEle))][CanEditMultipleObjects]
 	public class VEleInspector : Editor 
 	{
 		/// 编辑器下的自动添加 
@@ -33,17 +33,6 @@ namespace CXEditor
 		}
 
 
-		void DepthMoveBack()
-		{
-			VEle _this = (VEle)this.target;
-			_this.Drawcall.ElementIndexSub1(_this);
-		}
-
-		void DepthMoveFront()
-		{
-			VEle _this = (VEle)this.target;
-			_this.Drawcall.ElementIndexAdd1(_this);
-		}
 
 		public override void OnInspectorGUI ()
 		{
@@ -60,7 +49,7 @@ namespace CXEditor
 				return;
 			}
 
-			EditorUILayout.IntFieldPlus2("Depth", "【 " + _this.depth + " 】", DepthMoveBack, DepthMoveFront);
+			EditorUILayout.IntField("Depth(Read Only)", _this.depth);
 			_this.Alpha = EditorUILayout.RangeField("Alpha", _this.Alpha, 0 ,1);
 			_this.Scale = EditorUILayout.FloadField("Scale", _this.Scale);
 			//_this.NotInChildRoot = EditorUILayout.BoolField("NotInChildRoot", _this.NotInChildRoot);

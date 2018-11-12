@@ -10,7 +10,7 @@ using CX;
 namespace CXEditor
 {
 	[InitializeOnLoad]
-	[CustomEditor(typeof(ImageColorVE))]
+	[CustomEditor(typeof(ImageColorVE))][CanEditMultipleObjects]
 	public class ImageColorVEInspector : ImageVEInspector 
 	{
 		static ImageColorVEInspector ()
