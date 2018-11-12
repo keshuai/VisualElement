@@ -425,7 +425,7 @@ namespace CX
 				m_Matrix = this.cachedTrans.localToWorldMatrix;
 				this.cachedTrans.hasChanged = false;
 			}
-				
+		
 			if (m_NeedUpdateMesh)
 			{
 				Debug.Log("View UpdateMesh");
@@ -434,7 +434,7 @@ namespace CX
 				// 更新标识复位
 				m_NeedUpdateMesh = false;
 			}
-			
+
 			// 进行绘制调用
 			// 在基于纯UI模式时可以改为非每帧调用 已节约耗电
 			this.DrawMesh();
@@ -442,15 +442,16 @@ namespace CX
 
 		private void DrawMesh()
 		{
-			Graphics.DrawMesh (_mMesh, m_Matrix, _mMat, this.gameObject.layer, 
-				null, 					// Camera camera, int submeshIndex
-				0, 						// int submeshIndex
-				null, 					// MaterialPropertyBlock properties
-				ShadowCastingMode.On,	// (!castShadows) ? ShadowCastingMode.Off : ShadowCastingMode.On, 
-				false, 					// bool receiveShadows
-				null, 					// Transform probeAnchor
-				false					// bool useLightProbes
-			);
+			Graphics.DrawMesh (_mMesh, m_Matrix, _mMat, this.gameObject.layer);
+//			Graphics.DrawMesh (_mMesh, m_Matrix, _mMat, this.gameObject.layer, 
+//				null, 					// Camera camera, int submeshIndex
+//				0, 						// int submeshIndex
+//				null, 					// MaterialPropertyBlock properties
+//				ShadowCastingMode.On,	// (!castShadows) ? ShadowCastingMode.Off : ShadowCastingMode.On, 
+//				false, 					// bool receiveShadows
+//				null, 					// Transform probeAnchor
+//				false					// bool useLightProbes
+//			);
 		}
 			
 	
@@ -577,6 +578,13 @@ namespace CX
 				Debug.LogError("the element you add has already belong to some drawcall: " + e.name);
 				//throw new System.Exception("the element you add has already belong to some drawcall");
 			}
+		}
+
+		/// 添加 已带有层级的 元素  
+		/// 如果是克隆的 
+		public void AddElements ()
+		{
+			
 		}
 
 		/// View 添加元素的入口 2

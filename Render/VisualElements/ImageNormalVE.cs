@@ -138,6 +138,7 @@ namespace CX
 		private void UpdateUV ()
 		{
 			m_UVChanged = false;
+			this.MarkNeedUpdate();
 
 			int vertexIndex = this.internalVertexIndex;
 			List<Vector2> uvList = m_DrawCall.m_UVList;
@@ -180,11 +181,13 @@ namespace CX
 			if (m_UVChanged)
 			{
 				this.UpdateUV();
+				this.MarkNeedUpdate();
 			}
 
 			if (m_ColorChanged)
 			{
 				this.UpdateColor();
+				this.MarkNeedUpdate();
 			}
 		}
 			

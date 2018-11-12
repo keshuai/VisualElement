@@ -391,6 +391,16 @@ namespace CX
 				}
 			}
 
+			// 在这里统一标识 view 的更新状态
+			// 更新mesh
+			// 更新索引
+			//if (m_UVChanged || m_ColorChanged)
+			//{
+				//m_UVChanged = false;
+				//m_ColorChanged = false;
+				//this.MarkNeedUpdate();
+			//}
+
 			// 更新状态
 			this.virtualLateUpdate();
 

@@ -258,7 +258,7 @@ namespace CX
 				if (m_Assets[i].assetType == ViewAssetType.TTF)
 				{
 					// Rebuild Text
-					Debug.Log("OnTTFRebuild");
+					// Debug.Log("OnTTFRebuild");
 					foreach(VEle e in m_DepthIndexArray)
 					{
 						if (e is Label)
