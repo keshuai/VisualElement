@@ -11,7 +11,7 @@ namespace CX
 {
 	class PivotValue
 	{
-		public static Vector2 Center = Vector2.zero;
+		public static Vector2      Center = Vector2.zero;
 
 		public static Vector2        Left = new Vector2(-0.5f,     0);
 		public static Vector2       Right = new Vector2( 0.5f,     0);
@@ -22,7 +22,6 @@ namespace CX
 		public static Vector2    TopRight = new Vector2( 0.5f,  0.5f);
 		public static Vector2  BottomLeft = new Vector2(-0.5f, -0.5f);
 		public static Vector2 BottomRight = new Vector2( 0.5f, -0.5f);
-
 	}
 
 	///

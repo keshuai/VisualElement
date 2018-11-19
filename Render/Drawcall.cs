@@ -560,43 +560,6 @@ namespace CX
 			return (T)this.NewElement(typeof(T));
 		}
 
-		public VEle NewElementInstertAtIndex(System.Type type, int depthIndex)
-		{
-			if (depthIndex == m_DepthIndexArray.Count)
-			{
-				return this.NewElement(type);
-			}
-
-			GameObject o = new GameObject(type.Name);
-			o.transform.SetParent(cachedTrans, false);
-
-			VEle e = (VEle)o.AddComponent(type);
-			this.InsertElementAtIndex(e, depthIndex);
-
-			this.MarkNeedUpdate();
-			return e;
-		}
-
-		public T NewElementInstertAtIndex<T>(int depthIndex) where T : VEle
-		{
-			return (T)this.NewElementInstertAtIndex(typeof(T), depthIndex);
-		}
-
-		/// 修正View与Element的关系
-		/// 暂未实现
-		private IEnumerable CorrectViewAndVE()
-		{
-			// 进行标识设定 确保同一个时间此函数只运行一个
-			yield return null;
-			// 收集元素的数据
-			// 并将所有元素与视图断开
-			// 等待一帧等待元素与视图重新建立连接
-			yield return null;
-			// 将收集到的元素数据进行还原
-			yield return null;
-			// 还原标识
-			yield break;
-		}
 
 		/// View 添加元素的入口 1
 		public void AddElement(VEle e)
@@ -617,28 +580,6 @@ namespace CX
 			}
 		}
 
-		/// 添加 已带有层级的 元素  
-		/// 如果是克隆的 
-		public void AddElements ()
-		{
-			
-		}
-
-		/// View 添加元素的入口 2
-		public void InsertElementAtIndex(VEle e, int depthIndex)
-		{
-			if (e.Drawcall == null)
-			{
-				this.AddElementToVertexList(e);
-				e.internalDepthIndex = depthIndex;
-				m_DepthIndexArray.Insert(depthIndex, e);
-				this.MarkNeedUpdateVertexIndex();
-			}
-			else
-			{
-				throw new System.Exception("the element you insert has already belong to some drawcall");
-			}
-		}
 		private void AddElementToVertexList (VEle e)
 		{
 			e.Drawcall = this;
@@ -695,130 +636,6 @@ namespace CX
 				this.RemoveElementFromVertexList(e);
 				this.RemoveElementFromIndexArray(e);
 				e.Drawcall = null;
-			}
-		}
-
-		//--------------------------------------------------------------------------------------------------------------
-		//------  (change/move)  index  Mehtod(s)  ---------------------------------------------------------------------
-		//------  the larger index at the front    ---------------------------------------------------------------------
-		//--------------------------------------------------------------------------------------------------------------
-
-		/// 交换索引 
-		private void Swap2ElementsIndex (int index1, int index2)
-		{
-			VEle e = m_DepthIndexArray[index1];
-
-			m_DepthIndexArray[index1] = m_DepthIndexArray[index2];
-			m_DepthIndexArray[index1].internalDepthIndex = index1;
-
-			m_DepthIndexArray[index2] = e;
-			e                   .internalDepthIndex = index2;
-
-			this.MarkNeedUpdateVertexIndex();
-		}
-
-		/// 交换索引 
-		public void Swap2ElementsIndex (VEle e1, VEle e2)
-		{
-			if (e1.Drawcall == this && e2.Drawcall == this)
-				this.Swap2ElementsIndex(e1.internalDepthIndex, e2.internalDepthIndex);
-		}
-
-		/// 层次(index) + 1
-		public void ElementIndexAdd1(VEle e)
-		{
-			if (e.Drawcall == this)
-			{
-				int index = e.internalDepthIndex;
-				if (index < m_ElementIndexArray.Count - 1)
-				{
-					this.Swap2ElementsIndex(index, index + 1);
-				}
-			}
-		}
-
-		/// 层次(index) - 1
-		public void ElementIndexSub1(VEle e)
-		{
-			if (e.Drawcall == this)
-			{
-				int index = e.internalDepthIndex;
-				if (index >= 1)
-				{
-					this.Swap2ElementsIndex(index - 1, index);
-				}
-			}
-		}
-
-		/// 移动到指定index
-		private void ElementIndexMoveToIndexNoCheck(VEle e, int indexFrom, int indexTo)
-		{
-			if (indexFrom < indexTo)
-			{
-				for(int i = indexFrom; i < indexTo; ++i)
-				{
-					m_DepthIndexArray[i] = m_DepthIndexArray[i + 1];
-				}
-			}
-			else
-			{
-				for(int i = indexFrom; i > indexTo; --i)
-				{
-					m_DepthIndexArray[i] = m_DepthIndexArray[i - 1];
-				}
-			}
-
-			m_DepthIndexArray[indexTo] = e;
-
-			this.MarkNeedUpdateVertexIndex();
-		}
-
-		/// 移动到末尾 
-		private void ElementIndexMoveToEndNoCheck(VEle e)
-		{
-			m_DepthIndexArray.RemoveAt(e.internalDepthIndex);
-			m_DepthIndexArray.Add(e);
-			this.MarkNeedUpdateVertexIndex();
-		}
-
-
-
-		/// 移动到指定目标的位置,
-		/// 移动完成后, 比指定目标的index小1
-		/// 当index <= 0时, 移动到 0
-		/// 当index >= count时, 移动到末尾
-		public void ElementIndexMoveToIndex(VEle e, int indexTo)
-		{
-			if (e.Drawcall == this)
-			{
-				int indexFrom = e.internalDepthIndex;
-
-				// not need to move
-				if (indexFrom == indexTo || indexFrom == indexTo - 1)
-				{
-					return;
-				}
-
-				if (indexTo >= m_ElementIndexArray.Count)
-				{
-					this.ElementIndexMoveToEndNoCheck(e);
-				}
-				else 
-				{
-					if (indexTo < 0)
-					{
-						indexTo = 0;
-					}
-					this.ElementIndexMoveToIndexNoCheck(e, indexFrom, indexTo);
-				}
-			}
-		}
-
-		public void ElementIndexMoveToEnd(VEle e)
-		{
-			if (e.Drawcall == this)
-			{
-				this.ElementIndexMoveToEndNoCheck(e);
 			}
 		}
 	}

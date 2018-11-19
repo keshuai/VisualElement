@@ -17,6 +17,7 @@ namespace CX
 	}
 
 	// TODO 使用Mono重写ViewAsset对象
+	// 此种方式的缺点，同一个对象在多处会被序列化为多个
 	[System.Serializable]
 	public class ViewAsset 
 	{
