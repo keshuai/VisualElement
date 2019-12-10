@@ -1,4 +1,7 @@
-﻿Visual Element : 可视化元素, 用于渲染各种不同的元素
+﻿模式：UIMode UI模式，需要一个UICamera/ObjectMode对象模式，Camera由3D场景提供
+
+
+Visual Element : 可视化元素, 用于渲染各种不同的元素
 
 
 View 渲染视图，一个视图一个drawcall
