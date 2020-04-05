@@ -32,7 +32,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace MiniJSON {
+// 修改为MiniJson2避免重复导入的冲突麻烦
+namespace MiniJSON2 {
     // Example usage:
     //
     //  using UnityEngine;

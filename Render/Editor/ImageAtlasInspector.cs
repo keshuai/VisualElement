@@ -563,7 +563,7 @@ namespace CXEditor
 		public void SetAtlasTPTxt(string text)
 		{
 			// {frames{textue{},texture{}},mega{}}
-			Dictionary<string, object> jsonDic = MiniJSON.Json.Deserialize(text) as Dictionary<string, object>;
+			Dictionary<string, object> jsonDic = MiniJSON2.Json.Deserialize(text) as Dictionary<string, object>;
 			if (jsonDic == null)
 			{
 				return;
