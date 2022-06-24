@@ -18,7 +18,7 @@ public class CXEditorTools
 	[MenuItem ("CX/GameObject/查看对象拥有的脚本全名")]
 	private static void PrintAllScriptName () 
 	{
-		Transform[] ts = Selection.GetTransforms ( SelectionMode.TopLevel | SelectionMode.OnlyUserModifiable );
+		Transform[] ts = Selection.GetTransforms ( SelectionMode.TopLevel | SelectionMode.Editable );
 
 		if ( ts == null || ts.Length == 0 )
 		{
@@ -55,7 +55,7 @@ public class CXEditorTools
 	[MenuItem ("CX/GameObject/查看对象Shader名称")]
 	private static void PrintShader ()
 	{
-		Transform[] ts = Selection.GetTransforms ( SelectionMode.TopLevel | SelectionMode.OnlyUserModifiable );
+		Transform[] ts = Selection.GetTransforms ( SelectionMode.TopLevel | SelectionMode.Editable );
 
 		if ( ts == null || ts.Length == 0 )
 		{
@@ -90,7 +90,7 @@ public class CXEditorTools
 
 	public static T GetComponentFromSelection <T> () where T : Component
 	{
-		Transform[] ts = Selection.GetTransforms ( SelectionMode.TopLevel | SelectionMode.OnlyUserModifiable );
+		Transform[] ts = Selection.GetTransforms ( SelectionMode.TopLevel | SelectionMode.Editable );
 
 		if ( ts == null || ts.Length == 0 )
 		{
