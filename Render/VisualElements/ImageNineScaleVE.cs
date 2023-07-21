@@ -120,6 +120,7 @@ namespace CX
 			{
 				m_ScaleChanged = false;
 				m_SizeChanged = false;
+				this.MarkNeedUpdate();
 
 				int trimLft = 0;
 				int trimRgt = 0;
@@ -280,8 +281,17 @@ namespace CX
 		protected override void virtualLateUpdate ()
 		{
 			this.UpdatePosition();
-			if (m_UVChanged) this.UpdateUV();
-			if (m_ColorChanged) this.UpdateColor();
+			if (m_UVChanged)
+			{
+				this.UpdateUV();
+				this.MarkNeedUpdate();
+			}
+
+			if (m_ColorChanged)
+			{
+				this.UpdateColor();
+				this.MarkNeedUpdate();
+			}
 		}
 	}
 }

@@ -423,6 +423,7 @@ namespace CX
 
 				// 进行扩容
 				m_DrawCall.ElementVertexCountChangedOnUpdate(this, this.internalVertexCount, newVertexCount);
+				this.MarkNeedUpdate();
 			}
 
 			// 更新位置与UV
@@ -432,6 +433,7 @@ namespace CX
 			if (m_ColorChanged)
 			{
 				this.UpdateColor();
+				this.MarkNeedUpdate();
 			}
 		}
 	}

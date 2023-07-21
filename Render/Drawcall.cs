@@ -465,7 +465,7 @@ namespace CX
 		
 			if (m_NeedUpdateMesh)
 			{
-				Debug.Log("View UpdateMesh");
+				// Debug.Log("View UpdateMesh");
 				// 更新绘制信息到Mesh
 				this.UpdateMesh(m_VerList, m_UVList, m_ColList, m_TriList);
 				// 更新标识复位

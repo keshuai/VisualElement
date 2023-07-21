@@ -226,7 +226,7 @@ namespace CX
 
 				if (this.MatrixChanged || textChanged || m_EffectChanged || m_ColorChanged)
 				{
-					Debug.Log("Label FullUpdate");
+					//Debug.Log("Label FullUpdate");
 					this.FullUpdate();
 
 					this.MarkNeedUpdate();
